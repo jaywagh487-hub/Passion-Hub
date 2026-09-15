@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PassionHub</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b0d12;
+            color: white;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 72px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            background: #10131a;
+            border-bottom: 1px solid #292d36;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ff6b2c;
+        }
+
+        .nav-buttons {
+            margin-left: auto;
+            display: flex;
+            gap: 12px;
+        }
+
+        .login-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid #3a3f49;
+            padding: 11px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .signup-btn {
+            background: #ff6b2c;
+            color: #111;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 600px;
+            padding: 80px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background:
+                radial-gradient(
+                    circle at 80% 40%,
+                    #432216,
+                    transparent 30%
+                );
+        }
+
+        .hero-text {
+            max-width: 650px;
+        }
+
+        .tag {
+            color: #ff7840;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            margin: 18px 0;
+            line-height: 1.05;
+        }
+
+        .hero h1 span {
+            color: #ff6b2c;
+        }
+
+        .hero p {
+            color: #9ba3b2;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .get-started {
+            background: #ff6b2c;
+            color: #111;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 9px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .explore {
+            background: #191d25;
+            color: white;
+            border: 1px solid #363b46;
+            padding: 14px 24px;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        /* BIG ICON */
+
+        .passion-art {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: #151920;
+            border: 1px solid #303540;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 75px;
+
+            box-shadow:
+                0 0 80px #ff6b2c22;
+        }
+
+        /* COMMUNITIES */
+
+        .communities {
+            padding: 70px 8%;
+            background: #10131a;
+            text-align: center;
+        }
+
+        .communities h2 {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #858e9e;
+            margin-bottom: 40px;
+        }
+
+        .cards {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .card {
+            text-align: left;
+
+            padding: 25px;
+
+            background: #151920;
+
+            border: 1px solid #292e38;
+
+            border-radius: 15px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b2c;
+        }
+
+        .icon {
+            font-size: 42px;
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #858e9e;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .coming {
+            color: #ff7840;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #606978;
+            border-top: 1px solid #292d36;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 800px) {
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 60px 6%;
+            }
+
+            .hero h1 {
+                font-size: 44px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .passion-art {
+                width: 240px;
+                height: 240px;
+                font-size: 50px;
+                margin-top: 45px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <div class="logo">
+        ⚡ <span>Passion</span>Hub
+    </div>
+
+    <div class="nav-buttons">
+
+        <button
+            class="login-btn"
+            onclick="goToLogin()">
+
+            Login
+
+        </button>
+
+
+        <button
+            class="signup-btn"
+            onclick="goToSignup()">
+
+            Get Started
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+
+    <div class="hero-text">
+
+        <div class="tag">
+
+            YOUR PASSION. YOUR PEOPLE.
+
+        </div>
+
+
+        <h1>
+
+            Find your
+            <span>tribe.</span>
+
+        </h1>
+
+
+        <p>
+
+            PassionHub connects people who share
+            the same passions. Discover communities,
+            meet new people, join events and build
+            real connections.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+
+            <button
+                class="get-started"
+                onclick="goToSignup()">
+
+                Get Started →
+
+            </button>
+
+
+            <button
+                class="explore"
+                onclick="scrollToCommunities()">
+
+                Explore Communities
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="passion-art">
+
+        🏍️ 🎮
+
+    </div>
+
+
+</section>
+
+
+
+<!-- COMMUNITIES -->
+
+<section
+    class="communities"
+    id="communities">
+
+
+    <h2>
+
+        Find Your Community
+
+    </h2>
+
+
+    <p class="subtitle">
+
+        Whatever you're passionate about,
+        there's a place for you.
+
+    </p>
+
+
+
+    <div class="cards">
+
+
+        <!-- BIKER -->
+
+        <div
+            class="card"
+            onclick="goToSignupWithCommunity('biker')">
+
+            <div class="icon">
+
+                🏍️
+
+            </div>
+
+
+            <h3>
+
+                Bikers
+
+            </h3>
+
+
+            <p>
+
+                Find nearby riders, organize group
+                rides, share routes and showcase
+                your bike.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- GAMER -->
+
+        <div
+            class="card"
+            onclick="goToSignupWithCommunity('gamer')">
+
+            <div class="icon">
+
+                🎮
+
+            </div>
+
+
+            <h3>
+
+                Gamers
+
+            </h3>
+
+
+            <p>
+
+                Find teammates, create squads,
+                join gaming sessions and tournaments.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- FITNESS -->
+
+        <div class="card">
+
+            <div class="icon">
+
+                💪
+
+            </div>
+
+
+            <h3>
+
+                Fitness
+
+            </h3>
+
+
+            <p>
+
+                Find workout partners, challenges
+                and fitness communities.
+
+            </p>
+
+
+            <div class="coming">
+
+                COMING SOON
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ARTISTS -->
+
+        <div class="card">
+
+            <div class="icon">
+
+                🎨
+
+            </div>
+
+
+            <h3>
+
+                Artists
+
+            </h3>
+
+
+            <p>
+
+                Connect with artists, creators
+                and creative communities.
+
+            </p>
+
+
+            <div class="coming">
+
+                COMING SOON
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MUSIC -->
+
+        <div class="card">
+
+            <div class="icon">
+
+                🎵
+
+            </div>
+
+
+            <h3>
+
+                Music
+
+            </h3>
+
+
+            <p>
+
+                Discover musicians, bands and
+                people with the same music taste.
+
+            </p>
+
+
+            <div class="coming">
+
+                COMING SOON
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PHOTOGRAPHY -->
+
+        <div class="card">
+
+            <div class="icon">
+
+                📸
+
+            </div>
+
+
+            <h3>
+
+                Photography
+
+            </h3>
+
+
+            <p>
+
+                Share photography, discover
+                creators and organize photo walks.
+
+            </p>
+
+
+            <div class="coming">
+
+                COMING SOON
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 PassionHub
+
+</footer>
+
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+
+function goToLogin() {
+
+    window.location.href = "/login";
+
+}
+
+
+function goToSignup() {
+
+    window.location.href = "/signup";
+
+}
+
+
+function goToSignupWithCommunity(community) {
+
+    window.location.href =
+        "/signup?community=" + community;
+
+}
+
+
+function scrollToCommunities() {
+
+    document
+        .getElementById("communities")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

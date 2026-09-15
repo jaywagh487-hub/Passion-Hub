@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Complete Profile - PassionHub</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #0b0d12;
+            color: white;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+        }
+
+        .container {
+            width: 500px;
+            background: #151920;
+            border: 1px solid #303540;
+            border-radius: 18px;
+            padding: 35px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ff6b2c;
+        }
+
+        h1 {
+            margin-top: 30px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #858e9e;
+            margin-bottom: 25px;
+        }
+
+        .community {
+            color: #ff7840;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-top: 17px;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border-radius: 8px;
+
+            border: 1px solid #343944;
+
+            background: #0d1016;
+
+            color: white;
+
+            font-size: 14px;
+        }
+
+        textarea {
+            height: 90px;
+            resize: none;
+        }
+
+        button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            margin-top: 25px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #ff6b2c;
+
+            color: #111;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ff7840;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="logo">
+
+        ⚡ <span>Passion</span>Hub
+
+    </div>
+
+
+    <h1>
+
+        Complete Your Profile 👤
+
+    </h1>
+
+
+    <p class="subtitle">
+
+        Welcome, <b>{{ name }}</b>!
+
+        <br><br>
+
+        Your community:
+
+        <span class="community">
+
+            {% if community == "biker" %}
+                🏍️ Biker
+            {% else %}
+                🎮 Gamer
+            {% endif %}
+
+        </span>
+
+    </p>
+
+
+    <form method="POST">
+
+
+        <!-- CITY -->
+
+        <label>
+            City
+        </label>
+
+        <input
+            type="text"
+            name="city"
+            placeholder="e.g. Nashik"
+            required
+        >
+
+
+        <!-- BIO -->
+
+        <label>
+            About You
+        </label>
+
+        <textarea
+            name="bio"
+            placeholder="Tell the community about yourself..."
+        ></textarea>
+
+
+        {% if community == "biker" %}
+
+
+            <!-- BIKE -->
+
+            <label>
+                Bike Model
+            </label>
+
+            <input
+                type="text"
+                name="bike_model"
+                placeholder="e.g. Royal Enfield Classic 350"
+                required
+            >
+
+
+            <!-- RIDING STYLE -->
+
+            <label>
+                Riding Style
+            </label>
+
+            <select
+                name="riding_style"
+                required
+            >
+
+                <option value="">
+                    Select riding style
+                </option>
+
+                <option value="Cruiser">
+                    Cruiser
+                </option>
+
+                <option value="Street">
+                    Street
+                </option>
+
+                <option value="Touring">
+                    Touring
+                </option>
+
+                <option value="Adventure">
+                    Adventure
+                </option>
+
+                <option value="Sports">
+                    Sports
+                </option>
+
+                <option value="Off-road">
+                    Off-road
+                </option>
+
+            </select>
+
+
+            <!-- EXPERIENCE -->
+
+            <label>
+                Riding Experience
+            </label>
+
+            <select
+                name="experience"
+                required
+            >
+
+                <option value="">
+                    Select experience
+                </option>
+
+                <option value="Beginner">
+                    Beginner
+                </option>
+
+                <option value="Intermediate">
+                    Intermediate
+                </option>
+
+                <option value="Advanced">
+                    Advanced
+                </option>
+
+            </select>
+
+
+        {% else %}
+
+
+            <!-- GAME -->
+
+            <label>
+                Favorite Game
+            </label>
+
+            <input
+                type="text"
+                name="game"
+                placeholder="e.g. Valorant"
+                required
+            >
+
+
+            <!-- PLATFORM -->
+
+            <label>
+                Gaming Platform
+            </label>
+
+            <select
+                name="platform"
+                required
+            >
+
+                <option value="">
+                    Select platform
+                </option>
+
+                <option value="PC">
+                    PC
+                </option>
+
+                <option value="PlayStation">
+                    PlayStation
+                </option>
+
+                <option value="Xbox">
+                    Xbox
+                </option>
+
+                <option value="Mobile">
+                    Mobile
+                </option>
+
+            </select>
+
+
+            <!-- RANK -->
+
+            <label>
+                Game Rank
+            </label>
+
+            <input
+                type="text"
+                name="rank"
+                placeholder="e.g. Diamond / Ascendant"
+                required
+            >
+
+
+            <!-- EXPERIENCE -->
+
+            <label>
+                Gaming Experience
+            </label>
+
+            <select
+                name="experience"
+                required
+            >
+
+                <option value="">
+                    Select experience
+                </option>
+
+                <option value="Beginner">
+                    Beginner
+                </option>
+
+                <option value="Intermediate">
+                    Intermediate
+                </option>
+
+                <option value="Advanced">
+                    Advanced
+                </option>
+
+            </select>
+
+
+        {% endif %}
+
+
+        <button type="submit">
+
+            Save Profile & Continue →
+
+        </button>
+
+
+    </form>
+
+
+</div>
+
+
+</body>
+
+</html>
