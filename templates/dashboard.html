@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - PassionHub</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b0d12;
+            color: white;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 70px;
+            background: #11141b;
+            border-bottom: 1px solid #292d36;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ff6b2c;
+        }
+
+        .search {
+            margin-left: 40px;
+            width: 300px;
+            padding: 11px 15px;
+            border-radius: 8px;
+            border: 1px solid #303540;
+            background: #191d25;
+            color: white;
+        }
+
+        .profile-mini {
+            margin-left: auto;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ff6b2c;
+            color: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* LAYOUT */
+
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 230px;
+            background: #10131a;
+            border-right: 1px solid #292d36;
+            padding: 25px 15px;
+        }
+
+        .menu-title {
+            color: #687181;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 15px 10px;
+        }
+
+        .menu {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            color: #a7afbd;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .menu:hover,
+        .active {
+            background: #211914;
+            color: #ff7840;
+        }
+
+        /* MAIN */
+
+        .main {
+            flex: 1;
+            padding: 35px;
+            max-width: 1000px;
+        }
+
+        .welcome {
+            padding: 30px;
+            border-radius: 17px;
+            border: 1px solid #303540;
+            background: linear-gradient(
+                135deg,
+                #191d25,
+                #291a12
+            );
+        }
+
+        .welcome h1 {
+            margin: 0 0 10px;
+            font-size: 34px;
+        }
+
+        .orange {
+            color: #ff6b2c;
+        }
+
+        .welcome p {
+            color: #929baa;
+        }
+
+        /* COMMUNITY */
+
+        .community-box {
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 15px;
+            background: #151920;
+            border: 1px solid #292e38;
+        }
+
+        .community-box h2 {
+            margin-top: 0;
+        }
+
+        .community-box p {
+            color: #858e9e;
+        }
+
+        /* POSTS */
+
+        .section-title {
+            margin-top: 30px;
+        }
+
+        .post {
+            background: #151920;
+            border: 1px solid #292e38;
+            border-radius: 14px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .post-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #ff6b2c;
+            color: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .post small {
+            color: #6f7888;
+        }
+
+        .post p {
+            color: #b9c0cb;
+            line-height: 1.5;
+        }
+
+        .actions {
+            color: #7f8898;
+            font-size: 14px;
+        }
+
+        /* EVENTS */
+
+        .events {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .event {
+            padding: 20px;
+            border-radius: 13px;
+            background: #151920;
+            border: 1px solid #292e38;
+        }
+
+        .event-icon {
+            font-size: 35px;
+        }
+
+        .event p {
+            color: #858e9e;
+        }
+
+        .event button {
+            background: #ff6b2c;
+            border: none;
+            padding: 9px 15px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .event button:hover {
+            background: #ff7840;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 800px) {
+
+            .sidebar {
+                width: 65px;
+            }
+
+            .menu {
+                font-size: 0;
+                text-align: center;
+            }
+
+            .menu::first-letter {
+                font-size: 20px;
+            }
+
+            .search {
+                display: none;
+            }
+
+            .main {
+                padding: 20px;
+            }
+
+            .events {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <div class="logo">
+        ⚡ <span>Passion</span>Hub
+    </div>
+
+    <input
+        class="search"
+        type="text"
+        placeholder="Search people, events..."
+    >
+
+    <div class="profile-mini">
+        {{ user["name"][0]|upper }}
+    </div>
+
+</header>
+
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="menu-title">
+            MENU
+        </div>
+
+        <button
+            class="menu active"
+            onclick="showHome()">
+            🏠 Home
+        </button>
+
+        <button
+            class="menu"
+            onclick="showCommunity()">
+
+            {% if user["community"] == "biker" %}
+                🏍️ Biker Hub
+            {% else %}
+                🎮 Gamer Hub
+            {% endif %}
+
+        </button>
+
+        <button
+            class="menu"
+            onclick="findPeople()">
+            👥 People
+        </button>
+
+        <button
+            class="menu"
+            onclick="showEvents()">
+            📅 Events
+        </button>
+
+        <button
+            class="menu"
+            onclick="messages()">
+            💬 Messages
+        </button>
+
+        <div class="menu-title">
+            ACCOUNT
+        </div>
+
+        <button
+            class="menu"
+            onclick="profile()">
+            👤 Profile
+        </button>
+
+        <a
+            href="/logout"
+            class="menu"
+            style="text-decoration:none;">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <!-- WELCOME -->
+
+        <section class="welcome" id="home">
+
+            <h1>
+                Welcome,
+                <span class="orange">
+                    {{ user["name"] }}
+                </span>
+                👋
+            </h1>
+
+            <p>
+
+                {% if user["community"] == "biker" %}
+                    Ready for your next ride? 🏍️
+                {% else %}
+                    Ready for your next game? 🎮
+                {% endif %}
+
+            </p>
+
+        </section>
+
+
+        <!-- PEOPLE -->
+
+        <section class="community-box" id="people">
+
+            <h2>👥 People</h2>
+
+            <p>
+                Connect with people who share your passion.
+            </p>
+
+            <p>🏍️ Jay S.</p>
+            <p>🎮 Pavan J.</p>
+            <p>🏍️ Vivek S.</p>
+            <p>🎮 Durgesh S.</p>
+
+        </section>
+
+
+        <!-- COMMUNITY -->
+
+        <section class="community-box" id="community">
+
+            <h2>
+
+                {% if user["community"] == "biker" %}
+                    🏍️ Biker Hub
+                {% else %}
+                    🎮 Gamer Hub
+                {% endif %}
+
+            </h2>
+
+            <p>
+
+                {% if user["community"] == "biker" %}
+
+                    Connect with riders, discover group rides,
+                    share routes and meet riders near you.
+
+                {% else %}
+
+                    Find teammates, create squads,
+                    join gaming sessions and tournaments.
+
+                {% endif %}
+
+            </p>
+
+        </section>
+
+
+        <!-- MESSAGES -->
+
+        <section class="community-box" id="messages">
+
+            <h2>💬 Messages</h2>
+
+            <p>
+                Your conversations will appear here.
+            </p>
+
+            <div class="post">
+
+                <b>Aditya R.</b>
+
+                <p>
+                    Hey! Ready for the next ride? 🏍️
+                </p>
+
+            </div>
+
+            <div class="post">
+
+                <b>Sahil K.</b>
+
+                <p>
+                    Let's play together! 🎮
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- CREATE POST -->
+
+        <div class="community-box">
+
+            <h3>Create a Post</h3>
+
+            <form
+                method="POST"
+                action="/create-post">
+
+                <textarea
+                    name="content"
+                    placeholder="What's happening in your community?"
+                    required
+                    style="
+                        width:100%;
+                        height:80px;
+                        background:#0d1016;
+                        color:white;
+                        border:1px solid #343944;
+                        border-radius:8px;
+                        padding:12px;
+                        resize:none;
+                    "
+                ></textarea>
+
+                <button
+                    type="submit"
+                    style="
+                        margin-top:10px;
+                        background:#ff6b2c;
+                        border:none;
+                        padding:10px 18px;
+                        border-radius:7px;
+                        font-weight:bold;
+                        cursor:pointer;
+                    "
+                >
+                    Post
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- COMMUNITY FEED -->
+
+        <h2 class="section-title">
+            Community Feed
+        </h2>
+
+
+        {% if posts %}
+
+            {% for post in posts %}
+
+                <article class="post">
+
+                    <div class="post-top">
+
+                        <div class="avatar">
+                            {{ post["name"][0]|upper }}
+                        </div>
+
+                        <div>
+
+                            <b>
+                                {{ post["name"] }}
+                            </b>
+
+                            <br>
+
+                            <small>
+                                {{ post["created_at"] }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <p>
+                        {{ post["content"] }}
+                    </p>
+
+                    <div class="actions">
+
+                        ❤️ Like
+                        &nbsp;&nbsp;
+                        💬 Comment
+                        &nbsp;&nbsp;
+                        ↗ Share
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="post">
+
+                <p>
+                    No posts yet. Be the first one to post! 🚀
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- EVENTS -->
+
+        <h2
+            class="section-title"
+            id="events">
+
+            Upcoming Events
+
+        </h2>
+
+
+        <!-- CREATE EVENT -->
+
+        <div
+            class="community-box"
+            style="margin-top:20px;">
+
+            <h3>📅 Create an Event</h3>
+
+            <form
+                method="POST"
+                action="/create-event">
+
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="Event title"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin:8px 0;
+                        background:#0d1016;
+                        color:white;
+                        border:1px solid #343944;
+                        border-radius:8px;
+                    "
+                >
+
+                <textarea
+                    name="description"
+                    placeholder="Event description"
+                    required
+                    style="
+                        width:100%;
+                        height:80px;
+                        padding:12px;
+                        margin:8px 0;
+                        background:#0d1016;
+                        color:white;
+                        border:1px solid #343944;
+                        border-radius:8px;
+                        resize:none;
+                    "
+                ></textarea>
+
+                <input
+                    type="date"
+                    id="event_date"
+                    name="event_date"
+                    required
+                    onclick="this.showPicker()"
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin:8px 0;
+                        background:#0d1016;
+                        color:white;
+                        border:1px solid #343944;
+                        border-radius:8px;
+                        font-size:16px;
+                        cursor:pointer;
+                    "
+                >
+
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="Location"
+                    required
+                    style="
+                        width:100%;
+                        padding:12px;
+                        margin:8px 0;
+                        background:#0d1016;
+                        color:white;
+                        border:1px solid #343944;
+                        border-radius:8px;
+                    "
+                >
+
+                <button
+                    type="submit"
+                    style="
+                        margin-top:10px;
+                        background:#ff6b2c;
+                        color:#111;
+                        border:none;
+                        padding:11px 20px;
+                        border-radius:7px;
+                        font-weight:bold;
+                        cursor:pointer;
+                    "
+                >
+                    ➕ Create Event
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- DATABASE EVENTS -->
+
+        {% if events %}
+
+            <div class="events">
+
+                {% for event in events %}
+
+                    <div class="event">
+
+                        <div class="event-icon">
+                            📅
+                        </div>
+
+                        <h3>
+                            {{ event["title"] }}
+                        </h3>
+
+                        <p>
+                            {{ event["description"] }}
+                        </p>
+
+                        <p>
+                            📍 {{ event["location"] }}
+                        </p>
+
+                        <p>
+                            🕒 {{ event["event_date"] }}
+                        </p>
+
+                        <small>
+                            Created by {{ event["name"] }}
+                        </small>
+
+                        <br>
+
+                        <!-- DYNAMIC VIEW EVENT BUTTON -->
+
+                        <button
+                            type="button"
+                            onclick="viewEvent(this)"
+                            data-title="{{ event['title']|e }}"
+                            data-description="{{ event['description']|e }}"
+                            data-location="{{ event['location']|e }}"
+                            data-date="{{ event['event_date']|e }}"
+                            data-creator="{{ event['name']|e }}"
+                            style="
+                                margin-top:12px;
+                                background:#ff6b2c;
+                                border:none;
+                                padding:9px 15px;
+                                border-radius:7px;
+                                font-weight:bold;
+                                cursor:pointer;
+                            "
+                        >
+                            View Event
+                        </button>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="post">
+
+                <p>
+                    No upcoming events yet.
+                    Create the first one! 🚀
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+
+</div>
+
+
+<script>
+
+function goToSection(id) {
+
+    const section = document.getElementById(id);
+
+    if (section) {
+
+        section.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+}
+
+
+function showHome() {
+    goToSection("home");
+}
+
+
+function showCommunity() {
+    goToSection("community");
+}
+
+
+function findPeople() {
+    goToSection("people");
+}
+
+
+function showEvents() {
+    goToSection("events");
+}
+
+
+function messages() {
+    goToSection("messages");
+}
+
+
+function profile() {
+    window.location.href = "/profile";
+}
+
+
+/* DYNAMIC VIEW EVENT */
+
+function viewEvent(button) {
+
+    const title = button.dataset.title;
+    const description = button.dataset.description;
+    const location = button.dataset.location;
+    const date = button.dataset.date;
+    const creator = button.dataset.creator;
+
+    alert(
+        "📅 " + title + "\n\n" +
+        "📝 " + description + "\n\n" +
+        "📍 Location: " + location + "\n" +
+        "📅 Date: " + date + "\n" +
+        "👤 Created by: " + creator
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>

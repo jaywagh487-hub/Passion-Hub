@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Choose Community - PassionHub</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #0b0d12;
+            color: white;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .box {
+            width: 500px;
+            padding: 35px;
+            background: #151920;
+            border: 1px solid #303540;
+            border-radius: 18px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            color: #8e97a6;
+        }
+
+        .communities {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .community {
+            padding: 30px 15px;
+            background: #1a1e26;
+            border: 1px solid #303540;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .community:hover {
+            border-color: #ff6b2c;
+        }
+
+        .community input {
+            display: none;
+        }
+
+        .icon {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            background: #ff6b2c;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>Choose Your Passion 🔥</h1>
+
+    <p>
+        Select the community you want to join.
+    </p>
+
+    <form method="POST">
+
+        <div class="communities">
+
+            <label class="community">
+                <input type="radio"
+                       name="community"
+                       value="biker"
+                       required>
+
+                <span class="icon">🏍️</span>
+                Bikers
+            </label>
+
+            <label class="community">
+                <input type="radio"
+                       name="community"
+                       value="gamer"
+                       required>
+
+                <span class="icon">🎮</span>
+                Gamers
+            </label>
+
+        </div>
+
+        <button type="submit">
+            Continue →
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
